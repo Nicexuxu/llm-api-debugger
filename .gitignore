@@ -1,0 +1,8 @@
+config.json
+templates.json
+tool_templates.json
+history/
+__pycache__/
+.venv/
+venv/
+*.pyc
