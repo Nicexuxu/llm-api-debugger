@@ -198,6 +198,14 @@ def format_usage(response: dict | None) -> str:
         parts.append(f"输出: {usage['completion_tokens']}")
     if "total_tokens" in usage:
         parts.append(f"总计: {usage['total_tokens']}")
+    # KV 缓存命中信息
+    hit = usage.get("prompt_cache_hit_tokens", 0)
+    miss = usage.get("prompt_cache_miss_tokens", 0)
+    if hit or miss:
+        total_cache = hit + miss
+        if total_cache > 0:
+            rate = hit / total_cache * 100
+            parts.append(f"缓存命中: {hit}/{total_cache} ({rate:.0f}%)")
     return " | ".join(parts)
 
 
